@@ -12,18 +12,32 @@ Test on DSS to see whether we can access internet through the brook proxy:
 ```
 curl -x 127.0.0.1:1081 www.google.com
 ```
+
+### Set proxy for apt
 Then we setup  proxy for `apt` on the jetson TX2 board:
 ```
 sudo vim /etc/apt/apt.conf.d/proxy.conf
 ```
 and add the following lines to the `proxy.conf`:
 ```shell
-Acquire::http::Proxy "http://169.254.25.35:1081/";
-Acquire::https::Proxy "http://169.254.25.35:1081/";
+Acquire::http::Proxy "http://169.254.25.45:1081/";
+Acquire::https::Proxy "http://169.254.25.45:1081/";
 ```
-Note that  `169.254.25.35` is the ip address of the ethernet which connects with jetson boards.
+Note that  `169.254.25.45` is the ip address of the ethernet which connects with jetson boards.
 Then we can use apt to install software on jetson TX2 board.
 
+### Set proxy for git
+```shell
+git config --global http.proxy  "http://169.254.25.45:1081/"
+git config --global https.proxy  "http://169.254.25.45:1081/"
+```
+
+### Set global proxy
+add the following lines to `~/.bashrc`
+```
+export http_proxy=169.254.25.45:1081/
+export https_proxy=169.254.25.45:1081/
+```
 
 ## Install `perf` from source
 We tried to install perf by apt but their isn't perf for jetson TX2's linux version (We can get the linux version with cmd `uname -r`).
@@ -85,14 +99,16 @@ List of pre-defined events (to be used in -e):
 
   mem:<addr>[/len][:access]                          [Hardware breakpoint]
 ```
-These are the avaliable performance event on jetson TX2 board.
+These are the avaliable performance events on jetson TX2 board.
+
+Use perf to collect PMU:
+```
+perf stat -e branch-misses,cache-misses,cache-references,cpu-cycles,instructions,cpu-clock,L1-dcache-load-misses,L1-dcache-loads,L1-dcache-store-misses,L1-dcache-stores,branch-load-misses,branch-loads cmd
+```
 
 Use perf to collect profiling data:
 ```shell
-perf record -e branch-misses,cache-misses,cache-references,\
-  cpu-cycles,instructions,cpu-clock,L1-dcache-load-misses,\
-  L1-dcache-loads,L1-dcache-store-misses,branch-load-misses,\
-  branch-loads -o out_pofile_name-perf.data cmd
+perf record -e branch-misses,cache-misses,cache-references,cpu-cycles,instructions,cpu-clock,L1-dcache-load-misses,L1-dcache-loads,L1-dcache-store-misses,branch-load-misses,branch-loads -o out_pofile_name-perf.data cmd
 ```
 Note replace the `out_pofile_name-perf.data` and `cmd` to your own output file name and execute command.
 We can also record the call-graph to inspect which set of functions consumes the most latency.
