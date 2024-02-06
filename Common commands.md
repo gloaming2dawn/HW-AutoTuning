@@ -25,3 +25,7 @@ LLVM 17 generate O3 pipeline
 ```shell
 llvm-as < /dev/null | opt -O3 -disable-output --print-pipeline-passes
 ```
+LLVM 17 print passes
+```shell
+opt --print-passes
+```
