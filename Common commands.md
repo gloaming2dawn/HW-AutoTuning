@@ -19,3 +19,9 @@ from obj to exe
 ```
 clang {obj} -o {exe}
 ```
+
+# Common commands in generating passes
+LLVM 17 generate O3 pipeline
+```shell
+llvm-as < /dev/null | opt -O3 -disable-output --print-pipeline-passes
+```
