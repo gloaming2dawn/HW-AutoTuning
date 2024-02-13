@@ -46,8 +46,16 @@ We need to build from linux source code.
 wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.4.38.tar.gz
 tar -xvf linux-4.4.38.tar.gz
 cd linux-4.4.38/tools/perf
-make -j4
+sudo make -j4
 ```
+or install a new version
+```shell
+wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.9.337.tar.gz
+tar -xvf linux-4.9.337.tar.gz
+cd linux-4.9.337/tools/perf
+sudo make -j4
+```
+
 If everthing is OK, then we can see `perf` in the folder.
 copy it the the system binary folder:
 
