@@ -41,7 +41,29 @@ export https_proxy=169.254.25.45:1081/
 
 ## Install `perf` from source
 We tried to install perf by apt but their isn't perf for jetson TX2's linux version (We can get the linux version with cmd `uname -r`).
-We need to build from linux source code.
+First install necessary libraries.
+```shell
+sudo apt install libdw-dev libelf-dev libperl-dev
+```
+
+We need to build from linux source code. If /usr/src/linux-headers-4.4.38-tegra/tools/perf already exists
+```shell
+cd /usr/src/linux-headers-4.4.38-tegra/tools/perf
+sudo apt install libdw-dev libelf-dev libperl-dev
+sudo make
+sudo make -j4
+```
+
+Else, we need to download the nvidia released linux source code.
+```shell
+wget https://developer.download.nvidia.com/embedded/L4T/r28_Release_v2.1/public_sources.tbz2
+tar -xvf public_sources.tbz2
+tar -xvf public_release/kernel_src.tbz2
+cd kernel/kernel-4.4/tools/perf
+sudo make -j4
+```
+
+Optional
 ```shell
 wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.4.38.tar.gz
 tar -xvf linux-4.4.38.tar.gz
@@ -49,13 +71,7 @@ cd linux-4.4.38/tools/perf
 sudo make -j4
 ```
 
-We need to build from linux source code.
-```shell
-cd /usr/src/linux-headers-4.4.38-tegra/tools/perf
-sudo apt install libdw-dev libelf-dev libperl-dev
-sudo make
-sudo make -j4
-```
+
 
 For newer Jetpack, first check the version
 ```shell
