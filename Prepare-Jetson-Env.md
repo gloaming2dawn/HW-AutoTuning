@@ -53,6 +53,7 @@ or install a new version
 wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.9.337.tar.gz
 tar -xvf linux-4.9.337.tar.gz
 cd linux-4.9.337/tools/perf
+sudo apt install libdw-dev,libelf-dev,libperl-dev
 sudo make -j4
 ```
 
