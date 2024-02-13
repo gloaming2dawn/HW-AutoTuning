@@ -48,12 +48,25 @@ tar -xvf linux-4.4.38.tar.gz
 cd linux-4.4.38/tools/perf
 sudo make -j4
 ```
-or install a new version
+
+We need to build from linux source code.
 ```shell
-wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.9.337.tar.gz
-tar -xvf linux-4.9.337.tar.gz
-cd linux-4.9.337/tools/perf
+cd /usr/src/linux-headers-4.4.38-tegra/tools/perf
 sudo apt install libdw-dev,libelf-dev,libperl-dev
+sudo make
+sudo make -j4
+```
+
+For newer Jetpack, first check the version
+```shell
+cat /etc/nv_tegra_release
+```
+```shell
+sudo apt install libdw-dev,libelf-dev,libperl-dev
+wget https://developer.nvidia.com/embedded/L4T/r32_Release_v7.4/Sources/T186/public_sources.tbz2
+tar -xvf public_sources.tbz2
+tar -xvf Linux_for_Tegra/source/public/kernel_src.tbz2
+cd kernel/kernel-4.9/tools/perf
 sudo make -j4
 ```
 
