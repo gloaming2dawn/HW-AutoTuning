@@ -91,6 +91,7 @@ copy it the the system binary folder:
 
 ```shell
 cp ./perf /usr/bin/
+sudo sh -c 'echo 1 >/proc/sys/kernel/perf_event_paranoid'
 ```
 
 Then we can test whether `perf` works and list all the software and hardware events:
