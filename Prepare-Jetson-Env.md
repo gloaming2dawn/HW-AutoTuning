@@ -38,6 +38,11 @@ add the following lines to `~/.bashrc`
 export http_proxy=169.254.25.45:1081/
 export https_proxy=169.254.25.45:1081/
 ```
+## Fix freq
+```shell
+sudo apt install cpufrequtils 
+sudo cpufreq-set -g performance
+```
 
 ## Install `perf` from source
 We tried to install perf by apt but their isn't perf for jetson TX2's linux version (We can get the linux version with cmd `uname -r`).
