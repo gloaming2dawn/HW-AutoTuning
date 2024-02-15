@@ -42,6 +42,8 @@ export https_proxy=169.254.25.45:1081/
 ```shell
 sudo apt install cpufrequtils 
 sudo cpufreq-set -g performance
+sudo nvpmodel -q
+sudo nvpmodel -m 0
 ```
 
 ## Install `perf` from source
