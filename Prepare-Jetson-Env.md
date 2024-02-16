@@ -43,6 +43,9 @@ export https_proxy=169.254.25.45:1081/
 sudo apt install cpufrequtils 
 sudo cpufreq-set -g performance
 cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_min_freq
+cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq
+sudo cpufreq-set -r --min 2035200
 sudo nvpmodel -q
 sudo nvpmodel -m 3
 ```
