@@ -41,7 +41,8 @@ export https_proxy=169.254.25.45:1081/
 ## Fix freq
 ```shell
 sudo apt install cpufrequtils 
-sudo cpufreq-set -g performance
+sudo cpufreq-set -r -g userspace
+sudo cpufreq-set -r --freq 2.04G
 cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_min_freq
 cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq
